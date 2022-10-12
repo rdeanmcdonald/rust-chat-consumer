@@ -1,0 +1,16 @@
+FROM rust
+RUN set -ex; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		cmake
+WORKDIR /usr/src
+RUN USER=root cargo new consume
+WORKDIR /usr/src/consume
+RUN rm Cargo.toml
+COPY ./Cargo.toml ./Cargo.toml
+RUN cargo build
+RUN rm src/*.rs
+COPY . .
+RUN cargo build
+ENTRYPOINT ["sh", "-c", "./target/debug/consume"]
+CMD []

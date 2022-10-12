@@ -1,0 +1,9 @@
+[log]
+level = "debug"
+
+[kafka]
+host = "kafka"
+port = "9092"
+
+[redis]
+host = "redis"
